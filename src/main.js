@@ -18,8 +18,10 @@ function excludeIfInBoth(arrA, arrB) {
       result.push(num);
     } else {
       countB.set(num, countB.get(num) - 1);
-    }
+    } 
+    countA.set(num, countA.get(num) - 1); //Needs to be moved around, maybe an if statement
   }
+  //we still have an extra 3 from A. Need to subtract it
   // In this block we compare B to A and push (B-(B&&A)) into C. Hopefully.
   for (const num of arrB) {
     if (!countA.has(num) || countA.get(num) === 0) {
@@ -28,6 +30,8 @@ function excludeIfInBoth(arrA, arrB) {
         countA.set(num, countA.get(num) - 1);
     }
   }
+
+  result.sort((a, b) => a - b); //Gotta be in order cause I can't read
 
   return result;
 }
